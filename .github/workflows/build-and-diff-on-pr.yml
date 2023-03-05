@@ -1,5 +1,8 @@
 name: build-and-diff-for-pr
-on: pull_request
+on: 
+  pull_request:
+    paths:
+    - '*.tex'
 
 jobs:
   build-latex:
