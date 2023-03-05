@@ -1,0 +1,48 @@
+name: build-and-diff-for-pr
+on: pull_request
+
+jobs:
+  build-latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v3
+      
+      - name: Download current latest rules
+        uses: robinraju/release-downloader@v1.7
+        with:
+          latest: true
+          fileName: "chaos-rules.tex"
+          out-file-path: "latest-rules"
+
+      - name: Diff pull request and current release
+        uses: xu-cheng/texlive-action/full@v1
+        with:
+          run: latexdiff --append-safecmd="label" latest-rules/chaos-rules.tex chaos-rules.tex > rules-diff.tex
+
+      - name: Compile diff
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: rules-diff.tex
+          latexmk_use_xelatex: true
+
+      - name: Compile rules file in PR
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: chaos-rules.tex
+          latexmk_use_xelatex: true
+      
+      - name: Upload compiled diff and rules file
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: |
+            rules-diff.pdf
+            chaos-rules.pdf
+      
+      - name: PR comment with file
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: |
+            빌드된 개정안과 차이점은 [이 workflow](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})의 artifact에서 보실 수 있습니다.
+            압축파일 내에서 `rules-diff.pdf` 파일이 개정전/후 비교본이며, `chaos-rules.pdf`이 빌드된 개정안입니다.

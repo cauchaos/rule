@@ -1,0 +1,38 @@
+name: build-rules-on-tag
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build-latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v3
+
+      - name: Compile LaTeX
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: chaos-rules.tex
+          latexmk_use_xelatex: true
+
+      - name: Upload a tex file to pre-release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: chaos-rules.tex
+          asset_name: chaos-rules.tex
+          tag: ${{ github.ref }}
+          prerelease: true
+          overwrite: true
+
+      - name: Upload a PDF file to pre-release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: chaos-rules.pdf
+          asset_name: chaos-rules.pdf
+          tag: ${{ github.ref }}
+          prerelease: true
+          overwrite: true
