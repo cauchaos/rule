@@ -1,0 +1,257 @@
+\documentclass{oblivoir}
+
+% 참고: 서식을 만들 때 법제체의 법령입안심사기준을 참고함.
+
+% 피드백용 명령에 이용됨.
+\usepackage[dvipsnames]{xcolor}
+\usepackage[normalem]{ulem}
+% 장, 조 스타일을 만들 때 이용 됨
+\usepackage{titlesec}
+% 항, 호, 목을 만들 때 이용 됨.
+\usepackage{enumitem}
+% 바닥글, 머릿글 설정에 이용 됨.
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+% 제목
+\title{ChAOS 회칙}
+\date{2018년 11월 제정}
+
+% 머릿글
+\fancyhead[L]{ChAOS 회칙}
+\fancyhead[C]{}
+\fancyhead[R]{}
+\renewcommand{\headrulewidth}{1pt}
+
+% 바닥글
+\fancyfoot[L]{\url{https://cauchaos.github.io}}
+\fancyfoot[C]{}
+\fancyfoot[R]{\thepage / \pageref{LastPage} 페이지}
+\renewcommand{\footrulewidth}{0.5pt}
+
+% 머릿글과 바닥글 설정 적용
+\fancypagestyle{plain}{
+    \pagestyle{fancy}
+} % 첫 페이지에 적용
+\pagestyle{fancy} % 2+ 페이지에 적용
+
+% 회칙 제목 스타일 변경
+\pretitle{\begin{center}\Huge}
+\posttitle{\end{center}}
+\predate{\begin{center}\Large}
+\postdate{\end{center}}
+
+% 저자(\author) 관련 공백 삭제
+\preauthor{}
+\postauthor{}
+\renewcommand{\maketitlehookb}{}
+
+% 장
+\titleformat{\chapter}[hang]
+{\normalfont\LARGE\bfseries}{제 \thechapter{}\chaptertitlename.}{0.5em}{}
+
+% 장 위아래의 공백 조정
+\titlespacing{\chapter}{0pt}{1em}{0.25em}
+
+% 조
+\newcommand{\wrapwithparenthesis}[1]{(#1)}
+\titleformat{\section}
+{\normalfont\large\bfseries}{제 \thesection{}조 }{0.5em}{\wrapwithparenthesis}
+
+% 가나다 넘버링
+\makeatletter
+\def\ganadatext#1{\expandafter\@ganadatext\csname c@#1\endcsname}
+\def\@ganadatext#1{\ifcase#1\or 가\or 나\or 다\or 라\or 마\or 바\or 사\or 아\or 자\or 차\or 카\or 타\or 파\or 하\fi}
+\makeatother
+\AddEnumerateCounter{\ganadatext}{\@ganadatext}{하}
+
+% 항 
+\setlist[enumerate, 1]{label=\large\protect\textcircled{\small\arabic*}, ref={\arabic*}}%ref={제\thesection조제\arabic*항}}
+
+% 호
+\setlist[enumerate, 2]{label={\arabic*.}, ref={\arabic*}}% ref={제\thesection조제\arabic{enumi}항\arabic*목}}
+
+% 목
+\setlist[enumerate, 3]{label={\ganadatext*.}, ref={\arabic*}}% ref={제\thesection조제\arabic{enumi}항\arabic{enumii}목\arabic*목}}
+\setlist[enumerate, 4]{label={\arabic*)}, ref={\arabic*}}% ref={제\thesection조제\arabic{enumi}항\arabic{enumii}목\arabic{enumiii}목\arabic*목}}
+\setlist[enumerate, 5]{label={\ganadatext*)}, ref={\arabic*}}% ref={제\thesection조제\arabic{enumi}항\arabic{enumii}목\arabic{enumiii}목\arabic{enumiii}목\arabic*목}}
+
+% % 회칙 피드백시 사용되는 명령
+% \newcommand{\feedback}[1]{\textcolor{Dandelion}{#1}}
+% \newcommand{\addfeedback}[1]{\textcolor{Green}{#1}}
+% \newcommand{\delfeedback}[1]{\textcolor{Maroon}{\sout{#1}}}
+
+% 회칙 내용 시작
+\begin{document}
+\maketitle
+
+\chapter{총칙}
+
+\section{명칭}
+\begin{enumerate}
+    \item 본 학회의 한글 명칭은 `중앙대학교 알고리즘 학회'이다.
+    \item 본 학회의 영문 명칭은 `Chung-ang university Algorithm Organization and Society'이다.
+    \item 본 학회의 약칭은 `ChAOS'이며, 한글의 경우에는 `카오스'라 표기한다.
+\end{enumerate}
+
+\section{목표}
+\begin{enumerate}
+    \item 첫 번째 목표 \\ 본 학회가 생각하는 더 나은 개발자는 다음과 같은 조건을 가진다.
+          \begin{enumerate}
+              \item 첫 번째로 언어를 자유자재로 다룰 수 있는 숙련도를 지니고 있어야 한다.
+              \item 두 번째로 자료구조와 알고리즘에 대한 깊은 이해도를 지니고 있어야 한다.
+          \end{enumerate}
+          이러한 생각 아래 본 학회는 회원의 프로그래밍 언어와 자료구조, 알고리즘에 대한 이해와 적용을 증진시킨다.
+    \item 두 번째 목표 \\ 본 학회는 학부와 학회 내 학우의 알고리즘에 대한 관심과 흥미를 증진시킨다.
+\end{enumerate}
+
+\chapter{회원}
+\label{회원 장}
+
+\section{구성}
+\begin{enumerate}
+    \item 본 학회의 회원은 정회원과 준회원으로 구성된다.
+\end{enumerate}
+
+\section{자격}
+\label{자격 조항}
+\begin{enumerate}
+    \item \label{정회원 자격 1}이어지는 두 분기 내에 세 개 이상 회장이 인정하는 대회에 참여할 시 정회원의 자격을
+          가질 수 있다.
+    \item \label{정회원 자격 2}한 분기 내에 교육 부문 중 한 가지 이상에 참여하여 2/3 이상 이수할 시 정회원의 자격을 가질 수 있다.
+    \item \label{정회원 자격 3}매 분기 시작 시 회장이 공표하는 기준을 충족한 자는 정회원의 자격을 가질 수 있다.
+    \item 중앙대학교에 재학하는 자라면 누구든지 회장에게 가입 의사를 표시하여 준회원의 자격을 가질 수 있다.
+\end{enumerate}
+
+\section{권리}
+\begin{enumerate}
+    \item 정회원
+          \begin{enumerate}
+              \item 회장에 대한 선거권과 피선거권을 가진다.
+              \item 회칙 개정을 비롯한 의사 결정 과정에 참여할 수 있는 권리를 지닌다.
+              \item 본 학회가 실시하는 모든 활동에 참여할 수 있는 권리를 지닌다.
+          \end{enumerate}
+    \item 준회원
+          \begin{enumerate}
+            \item 본 학회가 실시하는 활동 중 회장이 인정하는 일부 활동에 참여할 수 있는 권리를 지닌다.
+          \end{enumerate}
+\end{enumerate}
+
+\section{의무}
+\begin{enumerate}
+    \item 본 학회의 회원은 본 학회의 활동에 성실하게 참여할 의무를 가진다.
+    \item 본 학회의 정회원은 본 학회의 운영에 필요한 회비를 납부해야 한다.
+\end{enumerate}
+
+\section{휴면}
+\begin{enumerate}
+    \item 정회원은 병역, 휴학, 회장이 인정하는 불가피한 사유로 일부 기간 동안 활동이 불가능할
+          경우 휴면할 수 있다.
+    \item 휴면 신청 시 회장에게 휴면하는 기간과 사유를 알려야 한다.
+    \item 휴면 중 휴면 기간 또는 사유에 변동이 발생할 경우 변경 사항을 알려야 한다.
+    \item 휴면 기간 동안 기존 등급이 변동되지 않고 유지된다.
+\end{enumerate}
+
+\section{은퇴}
+\begin{enumerate}
+    \item
+          정회원은 졸업, 회장이 인정하는 불가피한 사유로 활동이 불가능한 경우 은퇴할 수 있다.
+    \item
+          은퇴 이후 기존의 권한과 의무는 소멸하나, 회장이 인정하는 본 학회의 활동에 참여할
+          수 있다.
+\end{enumerate}
+
+\section{탈퇴}
+\begin{enumerate}
+    \item  탈퇴를 원하는 회원은 회장에게 탈퇴 의사를 표시하여 회장의 승인 하에 탈퇴할 수 있다.
+    \item  탈퇴 이후 기존의 권한과 의무는 모두 소멸한다.
+    \item  탈퇴 이후 준회원으로 재가입할 수 있다.
+\end{enumerate}
+
+\section{제명}
+\begin{enumerate}
+    \item  정회원은 다른 회원의 제명 안건을 정모에 상정할 수 있으며, 정모의 출석한 정회원의 과반의 찬성으로 가결된다.
+\end{enumerate}
+
+\section{강등}
+\begin{enumerate}
+    \item 정회원의 자격을 가진 후 이어지는 네 분기 동안 `제 \ref{회원 장}장 제 \ref{자격 조항}조 \ref{정회원 자격 1}항, \ref{정회원 자격 2}항, 혹은 \ref{정회원 자격 3}항'의 자격 요건을 갖추지 못할 시 회장의 판단 하에 준회원으로 강등된다.
+\end{enumerate}
+
+\chapter{회장}
+
+\section{회장}
+\begin{enumerate}
+    \item  학회의 대표로서 본 학회 운영의 최종 결정 권한을 가지는 정회원이다.
+    \item  본 학회의 회원과 재정을 관리하며 본 학회의 일체의 활동을 총괄한다.
+    \item  부 회장을 비롯한 정회원으로 이루어진 임원단을 구성하여 권한을 분할하거나 위임할
+          수 있다.
+\end{enumerate}
+
+\section{후보}
+\begin{enumerate}
+    \item  아래 각 호를 모두 충족하는 자는 학회의 회장 선거 후보로 출마할 수 있다.
+    \begin{enumerate}
+        \item 본 학회 내 정회원으로 재적 중인 자
+        \item 중앙대학교 소프트웨어학부에 재학 중인 자
+        \item 휴면 중이 아니며 이어지는 네 분기 동안 휴면하지 않을 자
+    \end{enumerate}
+\end{enumerate}
+
+\section{선거}
+\begin{enumerate}
+    \item  보통 · 평등 · 직접 · 비밀 선거에 의하여 선출한다.
+    \item  선거일로 7일 이전 공고된 정모에서 출석한 정회원의 과반 득표로 당선된다.
+    \item  부득이한 경우 온라인 투표를 7일 이상 진행하며 정회원의 재적 인원 과반 참여와 참여
+          인원 과반 득표로 당선된다.
+    \item  회장의 정기 선출 시기는 4분기 말로 한다.
+\end{enumerate}
+
+\section{임기}
+\begin{enumerate}
+    \item  임기는 1분기 시작일로부터 4분기 종료일까지로 한다.
+    \item  \label{president-must-appoint-the acting}임기 중 불가피한 사유로 직무를 수행하지 못하게 될 경우 회장이 회장 권한 대행을 지
+          명하거나, 후임 회장을 선출해야 한다.
+\end{enumerate}
+
+\chapter{운영}
+
+\section{정모}
+\begin{enumerate}
+    \item 정모는 본 학회의 회원들의 정기 모임으로 각종 안건을 처리한다.
+    \item 다음 정모의 일시는 정모 1주일 전에 공지한다.
+    \item 정모의 장소는 회장의 결정에 의하여 정모 3일 전까지 공지한다.
+    \item 한 학기에 두 번 이상 필수적으로 진행한다.
+\end{enumerate}
+
+\section{분기}
+\begin{enumerate}
+    \item  본 학회는 당해의 겨울방학을 1분기, 1학기를 2분기, 여름방학을 3분기, 2학기를 4분기
+          로 지정한다.
+\end{enumerate}
+
+\section{회계}
+\begin{enumerate}
+    \item  회장은 본 학회의 운영에 필요하다고 판단할 때마다 회비를 회원에게 걷을 수 있다.
+    \item  회장은 정모에서 정한 사용 목적과 제한 내에서 재정을 집행해야 한다.
+    \item  회장은 회비를 걷을 경우 회계 내역을 2분기 말과 4분기 말 정모에서 회원에게 공고해야 한다.
+\end{enumerate}
+
+\section{구조}
+\begin{enumerate}
+    \item  본 학회의 사업을 비롯한 구조는 당해의 회장이 정한다.
+\end{enumerate}
+
+\section{기타}
+\begin{enumerate}
+    \item  그 외의 운영에 관한 모든 사항은 정모를 통해 결정한다.
+\end{enumerate}
+
+\section{개정}
+\begin{enumerate}
+    \item  본 회칙의 개정은 정모에서 출석한 정회원의 2/3 이상 찬성과 회장의 승인으로 가결한
+          다.
+    \item  개정 당일 개정된 회칙을 모든 정회원에게 공고하고, 7일 동안의 이의 제기 기간 동안
+          이의 제기가 없을 시 효력이 발생한다.
+\end{enumerate}
+\end{document}
